@@ -1,47 +1,40 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-import { Button } from '../../components/UI/Button/Button';
-import { Input } from '../../components/UI/Input/Input';
 import { validateControl } from '../../shared/validation';
-import classes from './Auth.module.scss';
+import { Input } from '../../components/UI/Input/Input';
+import { Button } from '../../components/UI/Button/Button';
+import classes from './CreateTodo.module.scss';
 
-export class Auth extends Component {
+export class CreateTodo extends Component {
   state = {
     isLoggedIn: false,
     isFormValid: false,
     formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'Email',
-        errorMessage: 'Enter valid email',
+      date: {
+        value: new Date().toISOString().slice(0, 10),
+        type: 'date',
+        label: 'Date',
+        errorMessage: 'Enter valid date',
         valid: false,
         touched: false,
         validation: {
           required: true,
-          email: true,
         },
       },
-      password: {
+      task: {
         value: '',
-        type: 'password',
-        label: 'Password',
-        errorMessage: 'Enter valid password',
+        type: 'text',
+        label: 'Task',
+        errorMessage: 'Enter valid task',
         valid: false,
         touched: false,
         validation: {
           required: true,
           minLength: 6,
+          maxLength: 100,
         },
       },
     },
-  };
-
-  loginHandler = () => {};
-
-  submitHandler = (event) => {
-    event.preventDefault();
   };
 
   onChangeHandler = (event, controlName) => {
@@ -86,26 +79,21 @@ export class Auth extends Component {
 
   render() {
     return (
-      <div className={classes.Auth}>
-        <div>
-          <h1>Auth</h1>
-
-          <form onSubmit={this.submitHandler} className={classes.AuthForm}>
-            {this.renderInputs()}
-            <Link to={'/'}>
-              <Button
-                type="success"
-                onClick={this.loginHandler}
-                disabled={!this.state.isFormValid}
-              >
-                Let`s start
-              </Button>
-            </Link>
-            <Link to={'/sign-up'}>
-              <Button>Sign up</Button>
-            </Link>
-          </form>
-        </div>
+      <div className={classes.CreateTodo}>
+        <h3>Create new task</h3>
+        <form onSubmit={this.submitHandler} className={classes.CreateTodoForm}>
+          {this.renderInputs()}
+          <Button
+            type="success"
+            onClick={this.createTodoHandler}
+            disabled={!this.state.isFormValid}
+          >
+            Create task
+          </Button>
+          <Link to={'/'}>
+            <Button>Return</Button>
+          </Link>
+        </form>
       </div>
     );
   }

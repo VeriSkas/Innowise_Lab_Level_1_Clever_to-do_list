@@ -25,6 +25,10 @@ export const validateControl = (value, validation, password) => {
     isValid = value.length >= validation.minLength && isValid;
   }
 
+  if (validation.maxLength) {
+    isValid = value.length <= validation.maxLength && isValid;
+  }
+
   if (validation.isEqual) {
     isValid = value === password && isValid;
   }

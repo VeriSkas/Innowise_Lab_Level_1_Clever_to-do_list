@@ -6,6 +6,7 @@
     padding: 0;
     display: block;
     font-weight: bold;
+    text-align: start;
   }
 
   input {
@@ -23,7 +24,8 @@
     color: #f01f30;
     font-size: 12px;
     font-weight: bold;
-
+    text-align: start;
+    display: block;
   }
 
   &.invalid {
