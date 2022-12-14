@@ -7,36 +7,39 @@ import { validateControl } from '../../shared/validation';
 import classes from './Auth.module.scss';
 
 export class Auth extends Component {
-  state = {
-    isLoggedIn: false,
-    isFormValid: false,
-    formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'Email',
-        errorMessage: 'Enter valid email',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true,
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      isFormValid: false,
+      formControls: {
+        email: {
+          value: '',
+          type: 'email',
+          label: 'Email',
+          errorMessage: 'Enter valid email',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            email: true,
+          },
+        },
+        password: {
+          value: '',
+          type: 'password',
+          label: 'Password',
+          errorMessage: 'Enter valid password',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            minLength: 6,
+          },
         },
       },
-      password: {
-        value: '',
-        type: 'password',
-        label: 'Password',
-        errorMessage: 'Enter valid password',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-      },
-    },
-  };
+    };
+  }
 
   loginHandler = () => {};
 
@@ -59,10 +62,10 @@ export class Auth extends Component {
       isFormValid = formControls[name].valid && isFormValid;
     });
 
-    this.setState({
-      formControls,
-      isFormValid,
-    });
+    this.setState((state) => ({
+      formControls: (state.formControls = formControls),
+      isFormValid: (state.isFormValid = isFormValid),
+    }));
   };
 
   renderInputs() {

@@ -1,30 +1,11 @@
+import { weekDays } from '../../shared/dateInformation';
 import classes from './DateItem.module.scss';
 
-const props = {
-  active: 'Active',
-  today: 'Today',
-  date: {
-    weekday: 'Sun',
-    day: 10,
-  },
-  todos: [
-    {
-      id: 1,
-      completed: true,
-    },
-    {
-      id: 2,
-      completed: true,
-    },
-    {
-      id: 3,
-      completed: false,
-    },
-  ],
-};
-
-export const DateItem = () => {
+export const DateItem = (props) => {
   const itemClass = [classes.Item, classes[props.active], classes[props.today]];
+  const date = new Date(props.date);
+  const weekday = weekDays[date.getDay()];
+
   const renderTodosOptions = (todos) => {
     if (todos) {
       return todos.map((todo) => {
@@ -37,11 +18,15 @@ export const DateItem = () => {
     }
   };
 
+  const activeDateHandler = () => {
+    props.onChangeDate(date);
+  };
+
   return (
     <div className={classes.DateItem}>
-      <div className={itemClass.join(' ')}>
-        <span className={classes.Weekday}>{props.date.weekday}</span>
-        <span className={classes.Day}>{props.date.day}</span>
+      <div className={itemClass.join(' ')} onClick={() => activeDateHandler()}>
+        <span className={classes.Weekday}>{weekday}</span>
+        <span className={classes.Day}>{date.getDate()}</span>
       </div>
       <div className={classes.ItemOptions}>
         {renderTodosOptions(props.todos)}

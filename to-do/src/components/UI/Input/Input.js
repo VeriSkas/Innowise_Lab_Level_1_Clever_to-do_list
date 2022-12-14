@@ -18,6 +18,7 @@ export const Input = (props) => {
         type={props.type || 'text'}
         id={props.label}
         value={props.value}
+        readOnly={props.readOnly || false}
         onChange={props.onChange}
       />
       {isInvalid(props) ? (

@@ -7,48 +7,51 @@ import { validateControl } from '../../shared/validation';
 import classes from './SignUp.module.scss';
 
 export class SignUp extends Component {
-  state = {
-    isFormValid: false,
-    formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'Email',
-        errorMessage: 'Enter valid email',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true,
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFormValid: false,
+      formControls: {
+        email: {
+          value: '',
+          type: 'email',
+          label: 'Email',
+          errorMessage: 'Enter valid email',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            email: true,
+          },
+        },
+        password: {
+          value: '',
+          type: 'password',
+          label: 'Password',
+          errorMessage: 'Enter valid password',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            minLength: 6,
+          },
+        },
+        password2: {
+          value: '',
+          type: 'password',
+          label: 'Repeat password',
+          errorMessage: 'Your passwords don`t equal',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            minLength: 6,
+            isEqual: true,
+          },
         },
       },
-      password: {
-        value: '',
-        type: 'password',
-        label: 'Password',
-        errorMessage: 'Enter valid password',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-      },
-      password2: {
-        value: '',
-        type: 'password',
-        label: 'Repeat password',
-        errorMessage: 'Your passwords don`t equal',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6,
-          isEqual: true,
-        },
-      },
-    },
-  };
+    };
+  }
 
   registrHandler = () => {};
 
@@ -86,10 +89,10 @@ export class SignUp extends Component {
       isFormValid = formControls[name].valid && isFormValid;
     });
 
-    this.setState({
-      formControls,
-      isFormValid,
-    });
+    this.setState((state) => ({
+      formControls: (state.formControls = formControls),
+      isFormValid: (state.isFormValid = isFormValid),
+    }));
   };
 
   renderInputs() {

@@ -7,6 +7,7 @@ import { Content } from './containers/Content/Content';
 import { Layout } from './HOC/Layout/Layout';
 import { CreateTodo } from './containers/CreateTodo/CreateTodo';
 import { MainPage } from './containers/MainPage/MainPage';
+import { TodoPage } from './containers/TodoPage/TodoPage';
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Content />}>
           <Route index element={<MainPage />} />
-          <Route path="to-do-create" element={<CreateTodo />} />
-          <Route path="to-do/:id" element={<Content />} />
+          <Route path="to-do-create/:date" element={<CreateTodo />} />
+          <Route path=":id" element={<TodoPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
