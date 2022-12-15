@@ -25,7 +25,7 @@ export class CreateTodo extends Component {
             required: true,
           },
         },
-        task: {
+        text: {
           value: '',
           type: 'text',
           label: 'Task',
@@ -75,8 +75,35 @@ export class CreateTodo extends Component {
     }));
   };
 
+  createTodoHandler = () => {
+    const todo = Object.keys(this.state.formControls).reduce(
+      (acc, controlName) => {
+        const control = this.state.formControls[controlName];
+        const value =
+          controlName === 'date' ? new Date(control.value) : control.value;
+
+        return { ...acc, [controlName]: value };
+      },
+      {
+        completed: false,
+        createDate: new Date(),
+      }
+    );
+    console.log(todo);
+  };
+
+  cleanForm = () => {
+    this.setState((state) => {
+      state.isFormValid = false;
+      state.formControls.text.value = '';
+
+      return state;
+    });
+  };
+
   submitHandler = (event) => {
     event.preventDefault();
+    this.cleanForm();
   };
 
   renderInputs() {

@@ -22,5 +22,9 @@
     box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: .5);
     padding: 15px;
     border-radius: 5px;
+
+    .AuthFormBtns {
+      text-align: center;
+    }
   }
 }

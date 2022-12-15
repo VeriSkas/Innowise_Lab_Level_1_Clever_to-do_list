@@ -1,12 +1,34 @@
 .Calendar {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 10px 0 10px;
   background: linear-gradient(270deg, #cef2fa 0%, #bee8fb 100%);
-  overflow-y: auto;
-
+  
   & > div {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    align-items: flex-start;
+    overflow-y: auto;
     border-radius: 5px;
+  }
+
+  .Month {
+    span {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .DateItems {
+    height: 110px;
+  }
+}
+
+@media (max-width: 500px) {
+  .Calendar {
+    .DateItems {
+      height: 91px;
+    }
   }
 }

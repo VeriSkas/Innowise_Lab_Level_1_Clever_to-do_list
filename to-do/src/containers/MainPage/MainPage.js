@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Button } from '../../components/UI/Button/Button';
 import { filterTodosByDate } from '../../shared/filterTodos';
 import { MockTodos } from '../../shared/mockData';
@@ -53,6 +54,18 @@ export class MainPage extends Component {
     }));
   };
 
+  deleteTodo = (id) => {
+    const todos = [...this.state.todos];
+    const todosOnDate = [...this.state.todosOnDate];
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    const updatedTodosOnDate = todosOnDate.filter((todo) => todo.id !== id);
+
+    this.setState((state) => ({
+      todos: (state.todos = updatedTodos),
+      todosOnDate: (state.updatedTodosOnDate = updatedTodosOnDate),
+    }));
+  };
+
   render() {
     const activeDateMs = +new Date(this.state.activeDate);
 
@@ -65,6 +78,7 @@ export class MainPage extends Component {
         <Todos
           todos={this.state.todosOnDate}
           changeTodoStatus={(id) => this.changeTodoStatus(id)}
+          deleteTodo={(id) => this.deleteTodo(id)}
         />
         <Link to={`/to-do-create/${activeDateMs}`}>
           <Button> &#10010; Add New Task</Button>

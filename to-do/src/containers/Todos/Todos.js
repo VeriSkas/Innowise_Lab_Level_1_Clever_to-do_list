@@ -17,9 +17,10 @@ export class Todos extends Component {
           <Todo
             key={todo.id}
             id={todo.id}
-            value={todo.value}
+            value={todo.text}
             completed={todo.completed}
             changeTodoStatus={(id) => this.props.changeTodoStatus(id)}
+            deleteTodo={(id) => this.props.deleteTodo(id)}
           />
         );
       });
@@ -31,7 +32,7 @@ export class Todos extends Component {
       <div className={classes.Todos}>
         <div>
           <h3>Todos</h3>
-          {this.renderTodo()}
+          <div className={classes.TodosMain}>{this.renderTodo()}</div>
         </div>
       </div>
     );

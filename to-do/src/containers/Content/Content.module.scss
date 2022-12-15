@@ -1,11 +1,10 @@
 .Content {
   display: flex;
   justify-content: center;
-  padding-top: 100px;
   flex-grow: 1;
-  width: 100%;
+  padding: 0 10px;
   background: linear-gradient(270deg, #ab2b95 0%, #59bfef 100%);
-
+  
   & > div {
     width: 100%;
     max-width: 762px;

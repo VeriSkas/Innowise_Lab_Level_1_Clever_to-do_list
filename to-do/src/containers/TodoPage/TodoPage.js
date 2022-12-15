@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { MockTodos } from '../../shared/mockData';
@@ -13,7 +14,7 @@ export class TodoPage extends Component {
       isLoggedIn: false,
       isFormValid: false,
       formControls: {
-        task: {
+        text: {
           value: '',
           type: 'text',
           label: 'Task',
@@ -42,13 +43,11 @@ export class TodoPage extends Component {
         }));
       })
       .then(() =>
-        this.setState((state) => ({
-          formControls: {
-            task: {
-              value: (state.formControls.task.value = this.state.todo.value),
-            },
-          },
-        }))
+        this.setState((state) => {
+          state.formControls.text.value = this.state.todo.text;
+
+          return state;
+        })
       );
   }
 
@@ -60,7 +59,6 @@ export class TodoPage extends Component {
     control.value = event.target.value;
     control.touched = true;
     control.valid = validateControl(control.value, control.validation);
-
     formControls[controlName] = control;
 
     Object.keys(formControls).forEach((name) => {
@@ -73,8 +71,40 @@ export class TodoPage extends Component {
     }));
   };
 
+  changeTodoHandler = () => {
+    const todo = { ...this.state.todo };
+    const updatedTodo = Object.keys(this.state.formControls).reduce(
+      (acc, controlName) => {
+        const control = this.state.formControls[controlName];
+        const value = control.value;
+
+        return { ...acc, [controlName]: value };
+      },
+      {
+        ...todo,
+        date: new Date(),
+      }
+    );
+    console.log(updatedTodo);
+  };
+
+  cleanForm = () => {
+    this.setState((state) => {
+      state.isFormValid = false;
+      state.formControls.text.value = '';
+
+      return state;
+    });
+  };
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.cleanForm();
+  };
+
   render() {
-    const control = this.state.formControls['task'];
+    const control = this.state.formControls['text'];
+
     return (
       <div className={classes.TodoPage}>
         <h3>Change task</h3>
@@ -87,7 +117,7 @@ export class TodoPage extends Component {
             label={control.label}
             errorMessage={control.errorMessage}
             shouldValidate={!!control.validation}
-            onChange={(event) => this.onChangeHandler(event, 'task')}
+            onChange={(event) => this.onChangeHandler(event, 'text')}
           />
           <Button
             type="success"

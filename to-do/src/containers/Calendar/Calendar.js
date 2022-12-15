@@ -1,15 +1,17 @@
 import { Component } from 'react';
 import { DateItem } from '../../components/DateItem/DateItem';
 import { filterTodosByDate } from '../../shared/filterTodos';
-import { calendarArray } from '../../shared/mockData';
+import { calendarArray, months } from '../../shared/mockData';
 import classes from './Calendar.module.scss';
 
 export class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      calendar: calendarArray(),
+      calendar: calendarArray(new Date().getFullYear(), new Date().getMonth()),
       activeDate: new Date(),
+      activeMonth: new Date().getMonth(),
+      activeYear: new Date().getFullYear(),
     };
   }
 
@@ -20,6 +22,29 @@ export class Calendar extends Component {
 
     this.props.onClick(date);
   }
+
+  changeMonth = (direction) => {
+    let activeMonth = this.state.activeMonth;
+    let activeYear = this.state.activeYear;
+
+    direction === 'after' ? activeMonth++ : activeMonth--;
+
+    if (activeMonth >= months.length) {
+      activeMonth = 0;
+      activeYear++;
+    }
+
+    if (activeMonth < 0) {
+      activeMonth = months.length - 1;
+      activeYear--;
+    }
+
+    this.setState((state) => ({
+      calendar: calendarArray(activeYear, activeMonth),
+      activeMonth: (state.activeMonth = activeMonth),
+      activeYear: (state.activeYear = activeYear),
+    }));
+  };
 
   renderDateItems() {
     return this.state.calendar.map((date) => {
@@ -54,7 +79,24 @@ export class Calendar extends Component {
   render() {
     return (
       <div className={classes.Calendar}>
-        <div>{this.renderDateItems()}</div>
+        <div className={classes.Month}>
+          <span
+            className={classes.LeftArrow}
+            onClick={() => this.changeMonth('before')}
+          >
+            &#10094;
+          </span>
+          <h3>{`${months[this.state.activeMonth]} ${
+            this.state.activeYear
+          }`}</h3>
+          <span
+            className={classes.RightArrow}
+            onClick={() => this.changeMonth('after')}
+          >
+            &#10095;
+          </span>
+        </div>
+        <div className={classes.DateItems}>{this.renderDateItems()}</div>
       </div>
     );
   }

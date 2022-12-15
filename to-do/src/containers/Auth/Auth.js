@@ -95,18 +95,20 @@ export class Auth extends Component {
 
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
-            <Link to={'/'}>
-              <Button
-                type="success"
-                onClick={this.loginHandler}
-                disabled={!this.state.isFormValid}
-              >
-                Let`s start
-              </Button>
-            </Link>
-            <Link to={'/sign-up'}>
-              <Button>Sign up</Button>
-            </Link>
+            <div className={classes.AuthFormBtns}>
+              <Link to={'/'}>
+                <Button
+                  type="success"
+                  onClick={this.loginHandler}
+                  disabled={!this.state.isFormValid}
+                >
+                  Let`s start
+                </Button>
+              </Link>
+              <Link to={'/sign-up'}>
+                <Button>Sign up</Button>
+              </Link>
+            </div>
           </form>
         </div>
       </div>

@@ -122,16 +122,18 @@ export class SignUp extends Component {
 
           <form onSubmit={this.submitHandler} className={classes.SignUpForm}>
             {this.renderInputs()}
-            <Button
-              type="success"
-              onClick={this.registrHandler}
-              disabled={!this.state.isFormValid}
-            >
-              Sign up
-            </Button>
-            <Link to={'/auth'}>
-              <Button>Return</Button>
-            </Link>
+            <div className={classes.SignUpFormBtns}>
+              <Button
+                type="success"
+                onClick={this.registrHandler}
+                disabled={!this.state.isFormValid}
+              >
+                Sign up
+              </Button>
+              <Link to={'/auth'}>
+                <Button>Return</Button>
+              </Link>
+            </div>
           </form>
         </div>
       </div>

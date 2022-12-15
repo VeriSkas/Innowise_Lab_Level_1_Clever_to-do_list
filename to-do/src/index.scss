@@ -7,13 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h3 {
+  margin: 10px 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 ::-webkit-scrollbar {
-  width: 24px;
+  width: 8px;
   height: 8px;
   background-color: linear-gradient(270deg, #cef2fa 0%, #bee8fb 100%);
 }
