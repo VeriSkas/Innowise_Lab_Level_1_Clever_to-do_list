@@ -17,3 +17,9 @@
     overflow-y: auto;
   }
 }
+
+@media (max-height: 830px) {
+  .Todos {
+    max-height: 330px;
+  }
+}

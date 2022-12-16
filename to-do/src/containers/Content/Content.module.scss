@@ -3,24 +3,25 @@
   justify-content: center;
   flex-grow: 1;
   padding: 0 10px;
-  background: linear-gradient(270deg, #ab2b95 0%, #59bfef 100%);
+  margin-top: 40px;
   
   & > div {
     width: 100%;
     max-width: 762px;
     padding: 0 20px;
   }
-
-  h1 {
-    color: #fff;
-    text-align: center;
-  }
-
+  
   .ContentMain {
     text-align: center;
     background: #eee;
     box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: .5);
     padding: 15px;
     border-radius: 5px;
+  }
+}
+
+@media (max-height: 830px) {
+  .Content {
+    margin-top: 10px;
   }
 }

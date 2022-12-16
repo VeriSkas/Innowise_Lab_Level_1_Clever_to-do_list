@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { signUpHandler } from '../../api/apiHandlers/SignUpHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { validateControl } from '../../shared/validation';
@@ -53,7 +54,13 @@ export class SignUp extends Component {
     };
   }
 
-  registrHandler = () => {};
+  registrHandler = () => {
+    const { email, password } = this.state.formControls;
+
+    if (email.value && password.value) {
+      signUpHandler(email.value, password.value);
+    }
+  };
 
   submitHandler = (event) => {
     event.preventDefault();

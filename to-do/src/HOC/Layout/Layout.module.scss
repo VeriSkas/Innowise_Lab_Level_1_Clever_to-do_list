@@ -4,10 +4,44 @@
   height: 100vh;
   width: 100vw;
   position: fixed;
+  background: linear-gradient(270deg, #ab2b95 0%, #59bfef 100%);
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(270deg, #501446 0%, #2f657e 100%);
+
+    .HeaderLogo {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+
+      .Logo {
+        background: url('../../img/127dbb65a9c54f8dbc5b520242369faa.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 40px;
+        height: 40px;
+      }
+
+      h1 {
+        margin: 0 10px;
+        color: #fff;
+        font-size: calc(24px + 5 * (100vw / 762));
+      }
+    }
+
+    button {
+      margin: 0 15px 0 0;
+    }
+  }
 
   main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
   }
 }

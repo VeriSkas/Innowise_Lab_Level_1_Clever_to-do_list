@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { authHandler } from '../../api/apiHandlers/AuthHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
 import { validateControl } from '../../shared/validation';
@@ -41,7 +42,13 @@ export class Auth extends Component {
     };
   }
 
-  loginHandler = () => {};
+  loginHandler = () => {
+    const { email, password } = this.state.formControls;
+
+    if (email.value && password.value) {
+      authHandler(email.value, password.value);
+    }
+  };
 
   submitHandler = (event) => {
     event.preventDefault();
@@ -96,15 +103,13 @@ export class Auth extends Component {
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
             <div className={classes.AuthFormBtns}>
-              <Link to={'/'}>
-                <Button
-                  type="success"
-                  onClick={this.loginHandler}
-                  disabled={!this.state.isFormValid}
-                >
-                  Let`s start
-                </Button>
-              </Link>
+              <Button
+                type="success"
+                onClick={this.loginHandler}
+                disabled={!this.state.isFormValid}
+              >
+                Let`s start
+              </Button>
               <Link to={'/sign-up'}>
                 <Button>Sign up</Button>
               </Link>
