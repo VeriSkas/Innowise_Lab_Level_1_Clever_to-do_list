@@ -54,11 +54,13 @@ export class SignUp extends Component {
     };
   }
 
-  registrHandler = () => {
+  registrHandler = async () => {
     const { email, password } = this.state.formControls;
 
     if (email.value && password.value) {
-      signUpHandler(email.value, password.value);
+      const response = await signUpHandler(email.value, password.value);
+
+      await this.props.responseHandler(response);
     }
   };
 

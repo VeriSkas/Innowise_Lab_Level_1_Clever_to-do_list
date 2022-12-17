@@ -1,0 +1,25 @@
+.Notification {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  color: #fff;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  &.Error {
+    background: rgba($color: #ff0000, $alpha: .5);
+    border: 3px solid red;
+  }
+
+  &.Success {
+    background: rgba($color: rgb(0, 187, 14), $alpha: .5);
+    border: 3px solid #00fd57;
+  }
+
+  &.Warning {
+    background: rgba($color: rgb(255, 142, 2), $alpha: .8);
+    border: 3px solid #e8ea05;
+  }
+}

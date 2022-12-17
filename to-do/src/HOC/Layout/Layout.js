@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import { logOut } from '../../api/apiHandlers/AuthHandler';
 import { Button } from '../../components/UI/Button/Button';
+import { Notification } from '../../components/UI/Notification/Notification';
 import classes from './Layout.module.scss';
 
 export class Layout extends Component {
@@ -24,6 +25,9 @@ export class Layout extends Component {
           </header>
         ) : null}
         <main>{this.props.children}</main>
+        {this.props.notification ? (
+          <Notification {...this.props.notification} />
+        ) : null}
       </div>
     );
   }

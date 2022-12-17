@@ -42,11 +42,13 @@ export class Auth extends Component {
     };
   }
 
-  loginHandler = () => {
+  loginHandler = async () => {
     const { email, password } = this.state.formControls;
 
     if (email.value && password.value) {
-      authHandler(email.value, password.value);
+      const response = await authHandler(email.value, password.value);
+
+      await this.props.responseHandler(response);
     }
   };
 
