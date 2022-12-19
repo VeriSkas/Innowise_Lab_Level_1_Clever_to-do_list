@@ -1,9 +1,14 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  deleteTodo,
+  getTodos,
+  updateTodo,
+} from '../../api/apiHandlers/DatabaseHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { filterTodosByDate } from '../../shared/filterTodos';
-import { MockTodos } from '../../shared/mockData';
+import { localStorageHandler } from '../../shared/localStorage';
 import { Calendar } from '../Calendar/Calendar';
 import { Todos } from '../Todos/Todos';
 import classes from './MainPage.module.scss';
@@ -12,25 +17,32 @@ export class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid: localStorageHandler('getItem', 'uid'),
       todos: [],
       todosOnDate: [],
-      todayDate: new Date(),
       activeDate: new Date(),
     };
   }
 
   componentDidMount() {
-    Promise.resolve()
-      .then(() => {
-        this.setState((state) => ({
-          todos: (state.todos = MockTodos.todos),
-        }));
-      })
-      .then(() => this.changeTodosAfterDate(this.state.todayDate));
+    this.getTodos();
   }
 
-  changeTodosAfterDate = (date) => {
-    const todos = [...this.state.todos];
+  getTodos = async () => {
+    await getTodos(this.state.uid)
+      .then((todos) => {
+        this.setState((state) => ({
+          todos: (state.todos = todos),
+        }));
+        this.props.getTodos(todos);
+        return todos;
+      })
+      .then((todos) => {
+        this.changeTodosAfterDate(this.state.activeDate, todos);
+      });
+  };
+
+  changeTodosAfterDate = (date, todos) => {
     const todosOnDate = filterTodosByDate(todos, date);
 
     this.setState((state) => ({
@@ -41,29 +53,14 @@ export class MainPage extends Component {
 
   changeTodoStatus = (id) => {
     const todos = [...this.state.todos];
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-      }
+    const updatedTodo = todos.find((todo) => todo.id === id);
 
-      return todo;
-    });
-
-    this.setState((state) => ({
-      todos: (state.todos = updatedTodos),
-    }));
+    updatedTodo.completed = !updatedTodo.completed;
+    updateTodo(this.state.uid, updatedTodo).then(() => this.getTodos());
   };
 
   deleteTodo = (id) => {
-    const todos = [...this.state.todos];
-    const todosOnDate = [...this.state.todosOnDate];
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    const updatedTodosOnDate = todosOnDate.filter((todo) => todo.id !== id);
-
-    this.setState((state) => ({
-      todos: (state.todos = updatedTodos),
-      todosOnDate: (state.updatedTodosOnDate = updatedTodosOnDate),
-    }));
+    deleteTodo(this.state.uid, id).then(() => this.getTodos());
   };
 
   render() {
@@ -73,7 +70,7 @@ export class MainPage extends Component {
       <div className={classes.MainPage}>
         <Calendar
           todos={[...this.state.todos]}
-          onClick={(date) => this.changeTodosAfterDate(date)}
+          onClick={(date) => this.changeTodosAfterDate(date, this.state.todos)}
         />
         <Todos
           todos={this.state.todosOnDate}

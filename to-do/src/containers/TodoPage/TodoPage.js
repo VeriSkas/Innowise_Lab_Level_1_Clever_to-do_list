@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { getTodo, updateTodo } from '../../api/apiHandlers/DatabaseHandler';
 import { Button } from '../../components/UI/Button/Button';
 import { Input } from '../../components/UI/Input/Input';
-import { MockTodos } from '../../shared/mockData';
+import { localStorageHandler } from '../../shared/localStorage';
 import { validateControl } from '../../shared/validation';
 import classes from './TodoPage.module.scss';
 
@@ -11,6 +12,7 @@ export class TodoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid: localStorageHandler('getItem', 'uid'),
       isLoggedIn: false,
       isFormValid: false,
       formControls: {
@@ -33,23 +35,21 @@ export class TodoPage extends Component {
   }
 
   componentDidMount() {
-    const idTodoInURL = +window.location.href.split('/').at(-1);
-
-    Promise.resolve()
-      .then(() => {
-        const todo = MockTodos.todos.find((todo) => todo.id === idTodoInURL);
-        this.setState((state) => ({
-          todo: (state.todo = todo),
-        }));
-      })
-      .then(() =>
-        this.setState((state) => {
-          state.formControls.text.value = this.state.todo.text;
-
-          return state;
-        })
-      );
+    this.getTodo();
   }
+
+  getTodo = async () => {
+    const idTodoInURL = window.location.href.split('/').at(-1);
+
+    await getTodo(this.state.uid, idTodoInURL).then((todo) => {
+      this.setState((state) => {
+        state.todo = todo;
+        state.formControls.text.value = todo.text;
+
+        return state;
+      });
+    });
+  };
 
   onChangeHandler = (event, controlName) => {
     const formControls = { ...this.state.formControls };
@@ -82,16 +82,16 @@ export class TodoPage extends Component {
       },
       {
         ...todo,
-        date: new Date(),
+        createDate: new Date().toJSON(),
       }
     );
-    console.log(updatedTodo);
+
+    updateTodo(this.state.uid, updatedTodo);
   };
 
   cleanForm = () => {
     this.setState((state) => {
       state.isFormValid = false;
-      state.formControls.text.value = '';
 
       return state;
     });

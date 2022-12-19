@@ -100,7 +100,7 @@ export class Auth extends Component {
     return (
       <div className={classes.Auth}>
         <div>
-          <h1>Auth</h1>
+          <h1>Authorization</h1>
 
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}

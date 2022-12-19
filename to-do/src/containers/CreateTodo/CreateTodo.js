@@ -1,15 +1,21 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { validateControl } from '../../shared/validation';
+import {
+  makeDateToInputFormat,
+  validateControl,
+} from '../../shared/validation';
 import { Input } from '../../components/UI/Input/Input';
 import { Button } from '../../components/UI/Button/Button';
 import classes from './CreateTodo.module.scss';
+import { localStorageHandler } from '../../shared/localStorage';
+import { createTodo } from '../../api/apiHandlers/DatabaseHandler';
 
 export class CreateTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      uid: localStorageHandler('getItem', 'uid'),
       isLoggedIn: false,
       isFormValid: false,
       formControls: {
@@ -45,9 +51,7 @@ export class CreateTodo extends Component {
   componentDidMount() {
     const todoDateFromURL = +window.location.href.split('/').at(-1);
     this.setState((state) => {
-      state.formControls.date.value = new Date(todoDateFromURL)
-        .toISOString()
-        .slice(0, 10);
+      state.formControls.date.value = makeDateToInputFormat(todoDateFromURL);
       state.formControls.date.valid = true;
 
       return state;
@@ -80,16 +84,19 @@ export class CreateTodo extends Component {
       (acc, controlName) => {
         const control = this.state.formControls[controlName];
         const value =
-          controlName === 'date' ? new Date(control.value) : control.value;
+          controlName === 'date'
+            ? new Date(control.value).toJSON()
+            : control.value;
 
         return { ...acc, [controlName]: value };
       },
       {
         completed: false,
-        createDate: new Date(),
+        createDate: new Date().toJSON(),
       }
     );
-    console.log(todo);
+
+    createTodo(this.state.uid, todo);
   };
 
   cleanForm = () => {

@@ -35,3 +35,7 @@ export const validateControl = (value, validation, password) => {
 
   return isValid;
 };
+
+export const makeDateToInputFormat = (date) => {
+  return new Date(date).toLocaleDateString().split('.').reverse().join('-');
+};

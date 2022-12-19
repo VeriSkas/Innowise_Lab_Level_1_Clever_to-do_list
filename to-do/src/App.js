@@ -10,17 +10,18 @@ import { Layout } from './HOC/Layout/Layout';
 import { CreateTodo } from './containers/CreateTodo/CreateTodo';
 import { MainPage } from './containers/MainPage/MainPage';
 import { TodoPage } from './containers/TodoPage/TodoPage';
-import { auth } from './api/api-config';
 import { localStorageHandler } from './shared/localStorage';
+import { auth } from './api/api-config';
 
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: !!localStorageHandler('getItem', 'uid'),
       notification: null,
       uid: null,
+      todos: [],
     };
   }
 
@@ -28,12 +29,13 @@ export class App extends Component {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+
         localStorageHandler('setItem', 'uid', uid);
-        this.setState(() => ({ isLoggedIn: true }));
       } else {
         localStorageHandler('removeItem', 'uid');
-        this.setState(() => ({ isLoggedIn: false }));
       }
+
+      this.setState(() => ({ isLoggedIn: !!user }));
     });
   }
 
@@ -68,44 +70,51 @@ export class App extends Component {
     }, 5000);
   }
 
+  getTodos(todos) {
+    this.setState(() => ({ todos }));
+  }
+
   render() {
+    const protectedRoutes = (
+      <Route path="/" element={<Content />}>
+        <Route
+          index
+          element={<MainPage getTodos={(todos) => this.getTodos(todos)} />}
+        />
+        <Route path="to-do-create/:date" element={<CreateTodo />} />
+        <Route
+          path="to-do/:id"
+          element={<TodoPage todos={this.state.todos} />}
+        />
+      </Route>
+    );
+    const unProtectedRoutes = (
+      <>
+        <Route
+          path="/auth"
+          element={
+            <Auth
+              responseHandler={(response) => this.responseHandler(response)}
+            />
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <SignUp
+              responseHandler={(response) => this.responseHandler(response)}
+            />
+          }
+        />
+      </>
+    );
     return (
       <Layout
         isLoggedIn={this.state.isLoggedIn}
         notification={this.state.notification}
       >
         <Routes>
-          <Route
-            path="/auth"
-            element={
-              this.state.isLoggedIn ? (
-                <Navigate to="/" replace />
-              ) : (
-                <Auth
-                  responseHandler={(response) => this.responseHandler(response)}
-                />
-              )
-            }
-          />
-          <Route
-            path="/sign-up"
-            element={
-              this.state.isLoggedIn ? (
-                <Navigate to="/" replace />
-              ) : (
-                <SignUp
-                  responseHandler={(response) => this.responseHandler(response)}
-                />
-              )
-            }
-          />
-          {this.state.isLoggedIn ? (
-            <Route path="/" element={<Content />}>
-              <Route index element={<MainPage />} />
-              <Route path="to-do-create/:date" element={<CreateTodo />} />
-              <Route path=":id" element={<TodoPage />} />
-            </Route>
-          ) : null}
+          {this.state.isLoggedIn ? protectedRoutes : unProtectedRoutes}
           <Route
             path="*"
             element={

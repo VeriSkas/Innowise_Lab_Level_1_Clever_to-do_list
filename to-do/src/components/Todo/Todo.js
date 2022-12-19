@@ -19,7 +19,7 @@ export const Todo = (props) => {
           </div>
         </div>
 
-        <Link to={`${props.id}`}>
+        <Link to={`to-do/${props.id}`}>
           <p className={classes.Value}>{props.value}</p>
         </Link>
         <div>
