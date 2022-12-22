@@ -1,10 +1,12 @@
+@import '../../shared/styles/color.scss';
+
 .Calendar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px 10px 0 10px;
-  background: linear-gradient(270deg, #cef2fa 0%, #bee8fb 100%);
-  
+  background: linear-gradient(270deg, $authBlueLight1 0%, $authBlueLight3 100%);
+
   & > div {
     display: flex;
     justify-content: space-between;
@@ -22,6 +24,14 @@
 
   .DateItems {
     height: 110px;
+  }
+}
+
+.darkTheme {
+  background: $blueDarkTheme;
+
+  h3 {
+    color: $lightColor;
   }
 }
 

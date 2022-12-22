@@ -83,6 +83,7 @@ export class Auth extends Component {
       return (
         <Input
           key={i}
+          theme={this.props.theme}
           type={control.type}
           value={control.value}
           valid={control.valid}
@@ -98,11 +99,14 @@ export class Auth extends Component {
 
   render() {
     return (
-      <div className={classes.Auth}>
+      <div className={[classes.Auth, classes[this.props.theme]].join(' ')}>
         <div>
           <h1>Authorization</h1>
 
-          <form onSubmit={this.submitHandler} className={classes.AuthForm}>
+          <form
+            onSubmit={this.submitHandler}
+            className={[classes.AuthForm, classes[this.props.theme]].join(' ')}
+          >
             {this.renderInputs()}
             <div className={classes.AuthFormBtns}>
               <Button

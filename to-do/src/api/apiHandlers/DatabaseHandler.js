@@ -1,5 +1,5 @@
 import { onValue, push, ref, remove, set, update } from 'firebase/database';
-import { database } from '../api-config';
+import { database } from '../apiConfig';
 
 export const createTodo = async (uid, todo) => {
   const todosRef = ref(database, `${uid}/todos`);

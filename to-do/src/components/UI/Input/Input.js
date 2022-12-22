@@ -5,7 +5,8 @@ function isInvalid({ valid, touched, shouldValidate }) {
 }
 
 export const Input = (props) => {
-  const cls = [classes.Input];
+  const theme = props.theme ? classes[props.theme] : '';
+  const cls = [classes.Input, theme];
 
   if (isInvalid(props)) {
     cls.push(classes.invalid);

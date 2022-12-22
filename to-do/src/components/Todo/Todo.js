@@ -8,7 +8,7 @@ export const Todo = (props) => {
   const deleteCls = [classes.Option, classes.Done].join(' ');
 
   return (
-    <div className={classes.Todo}>
+    <div className={[classes.Todo, classes[props.theme]].join(' ')}>
       <div>
         <div>
           <div

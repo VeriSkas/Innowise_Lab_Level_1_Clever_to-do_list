@@ -17,6 +17,7 @@ export class Todos extends Component {
           <Todo
             key={todo.id}
             id={todo.id}
+            theme={this.props.theme}
             value={todo.text}
             completed={todo.completed}
             changeTodoStatus={(id) => this.props.changeTodoStatus(id)}
@@ -29,7 +30,7 @@ export class Todos extends Component {
 
   render() {
     return (
-      <div className={classes.Todos}>
+      <div className={[classes.Todos, classes[this.props.theme]].join(' ')}>
         <div>
           <h3>Todos</h3>
           <div className={classes.TodosMain}>{this.renderTodo()}</div>

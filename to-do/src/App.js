@@ -11,13 +11,15 @@ import { CreateTodo } from './containers/CreateTodo/CreateTodo';
 import { MainPage } from './containers/MainPage/MainPage';
 import { TodoPage } from './containers/TodoPage/TodoPage';
 import { localStorageHandler } from './shared/localStorage';
-import { auth } from './api/api-config';
+import { auth } from './api/apiConfig';
+import { changeTheme, themes } from './shared/appTheme';
 
 export class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      theme: themes.light,
       isLoggedIn: !!localStorageHandler('getItem', 'uid'),
       notification: null,
       uid: null,
@@ -26,6 +28,7 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    changeTheme(this.state.theme);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
@@ -76,15 +79,25 @@ export class App extends Component {
 
   render() {
     const protectedRoutes = (
-      <Route path="/" element={<Content />}>
+      <Route path="/" element={<Content theme={this.state.theme} />}>
         <Route
           index
-          element={<MainPage getTodos={(todos) => this.getTodos(todos)} />}
+          element={
+            <MainPage
+              getTodos={(todos) => this.getTodos(todos)}
+              theme={this.state.theme}
+            />
+          }
         />
-        <Route path="to-do-create/:date" element={<CreateTodo />} />
+        <Route
+          path="to-do-create/:date"
+          element={<CreateTodo theme={this.state.theme} />}
+        />
         <Route
           path="to-do/:id"
-          element={<TodoPage todos={this.state.todos} />}
+          element={
+            <TodoPage todos={this.state.todos} theme={this.state.theme} />
+          }
         />
       </Route>
     );
@@ -95,6 +108,7 @@ export class App extends Component {
           element={
             <Auth
               responseHandler={(response) => this.responseHandler(response)}
+              theme={this.state.theme}
             />
           }
         />
@@ -103,6 +117,7 @@ export class App extends Component {
           element={
             <SignUp
               responseHandler={(response) => this.responseHandler(response)}
+              theme={this.state.theme}
             />
           }
         />
@@ -112,6 +127,7 @@ export class App extends Component {
       <Layout
         isLoggedIn={this.state.isLoggedIn}
         notification={this.state.notification}
+        theme={this.state.theme}
       >
         <Routes>
           {this.state.isLoggedIn ? protectedRoutes : unProtectedRoutes}

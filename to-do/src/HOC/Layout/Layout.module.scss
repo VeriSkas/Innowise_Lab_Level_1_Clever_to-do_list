@@ -1,16 +1,18 @@
+@import '../../shared/styles/color.scss';
+
 .Layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
   position: fixed;
-  background: linear-gradient(270deg, #ab2b95 0%, #59bfef 100%);
+  background: linear-gradient(270deg, $purpleLight 0%, $authBlueLight2 100%);
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(270deg, #501446 0%, #2f657e 100%);
+    background: linear-gradient(270deg, $purpleMediumLight 0%, $contentDarkTheme 100%);
 
     .HeaderLogo {
       display: flex;
@@ -28,7 +30,7 @@
 
       h1 {
         margin: 0 10px;
-        color: #fff;
+        color: $lightColor;
         font-size: calc(24px + 5 * (100vw / 762));
       }
     }
@@ -42,6 +44,9 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-
   }
+}
+
+.darkTheme {
+  background: linear-gradient(270deg, $purpleDark 0%, $blueDarkTheme2 100%);
 }

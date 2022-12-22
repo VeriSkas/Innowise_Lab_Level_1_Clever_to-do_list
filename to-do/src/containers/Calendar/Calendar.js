@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import { DateItem } from '../../components/DateItem/DateItem';
 import { filterTodosByDate } from '../../shared/filterTodos';
 import { calendarArray, months } from '../../shared/mockData';
@@ -70,6 +71,7 @@ export class Calendar extends Component {
       return (
         <DateItem
           onChangeDate={() => this.clickDateHandler(date)}
+          theme={this.props.theme}
           {...dateItemProps}
         />
       );
@@ -78,7 +80,7 @@ export class Calendar extends Component {
 
   render() {
     return (
-      <div className={classes.Calendar}>
+      <div className={[classes.Calendar, classes[this.props.theme]].join(' ')}>
         <div className={classes.Month}>
           <span
             className={classes.LeftArrow}

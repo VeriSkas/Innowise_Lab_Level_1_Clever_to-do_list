@@ -1,10 +1,12 @@
+@import '../../shared/styles/color.scss';
+
 .SignUp {
   display: flex;
   justify-content: center;
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(270deg, #91f787 0%, #00c71d 100%);
+  background: linear-gradient(270deg, $greenLightTheme1 0%, $greenLightTheme2 100%);
 
   & > div {
     width: 100%;
@@ -13,18 +15,26 @@
   }
 
   h1 {
-    color: #fff;
+    color: $lightColor;
     text-align: center;
   }
 
   .SignUpForm {
-    background: #eee;
-    box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: .5);
+    background: $lightAuthForm;
+    box-shadow: 2px 2px 2px $shadowColor;
     padding: 15px;
     border-radius: 5px;
 
     .SignUpFormBtns {
       text-align: center;
     }
+  }
+}
+
+.darkTheme {
+  background: linear-gradient(290deg, $black 0%, $orangeDarkTheme 100%);
+
+  .SignUpForm {
+    background: $orangeGreyDarkTheme;
   }
 }

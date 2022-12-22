@@ -110,6 +110,7 @@ export class TodoPage extends Component {
         <h3>Change task</h3>
         <form onSubmit={this.submitHandler} className={classes.TodoPageForm}>
           <Input
+            theme={this.props.theme}
             type={control.type}
             value={control.value}
             valid={control.valid}

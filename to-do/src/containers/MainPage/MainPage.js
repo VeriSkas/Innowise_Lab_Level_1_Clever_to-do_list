@@ -71,11 +71,13 @@ export class MainPage extends Component {
         <Calendar
           todos={[...this.state.todos]}
           onClick={(date) => this.changeTodosAfterDate(date, this.state.todos)}
+          theme={this.props.theme}
         />
         <Todos
           todos={this.state.todosOnDate}
           changeTodoStatus={(id) => this.changeTodoStatus(id)}
           deleteTodo={(id) => this.deleteTodo(id)}
+          theme={this.props.theme}
         />
         <Link to={`/to-do-create/${activeDateMs}`}>
           <Button> &#10010; Add New Task</Button>

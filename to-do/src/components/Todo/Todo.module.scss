@@ -1,8 +1,10 @@
+@import '../../shared/styles/color.scss';
+
 .Todo {
   width: calc(100% - 10px);
-  background: #fff;
+  background: $lightColor;
   margin-bottom: 10px;
-  box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: .5);
+  box-shadow: 2px 2px 2px $shadowColor;
 
   & > div {
     display: flex;
@@ -11,7 +13,7 @@
     padding: 5px;
     border-radius: 5px;
   }
-  
+
   .Option {
     display: flex;
     justify-content: center;
@@ -20,20 +22,20 @@
     height: calc(12px + 5 * (100vw / 762));
     overflow: hidden;
     border-radius: 50%;
-    border: 2px solid rgb(234, 108, 5);
+    border: 2px solid $orange;
     margin: 0 calc(5px + 5 * (100vw / 762));
     font-size: calc(10px + 5 * (100vw / 762));
-    color: #fff;
+    color: $lightColor;
     cursor: pointer;
 
     &.Done {
-      background: rgb(234, 108, 5);
+      background: $orange;
     }
   }
 
   a {
     text-decoration: none;
-    color: black;
+    color: $black;
     width: 100%;
 
     p {
@@ -41,5 +43,17 @@
       margin: calc(5px + 5 * (100vw / 762));
       font-size: calc(12px + 3 * (100vw / 762));
     }
+  }
+}
+
+.darkTheme {
+  background: $darkTheme1;
+
+  .Option {
+    color: $darkTheme1;
+  }
+
+  a {
+    color: $lightColor;
   }
 }

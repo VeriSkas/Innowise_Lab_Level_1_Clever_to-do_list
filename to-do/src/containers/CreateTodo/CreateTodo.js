@@ -119,6 +119,7 @@ export class CreateTodo extends Component {
       return (
         <Input
           key={i}
+          theme={this.props.theme}
           type={control.type}
           value={control.value}
           valid={control.valid}

@@ -23,7 +23,7 @@ export const DateItem = (props) => {
   };
 
   return (
-    <div className={classes.DateItem}>
+    <div className={[classes.DateItem, classes[props.theme]].join(' ')}>
       <div className={itemClass.join(' ')} onClick={() => activeDateHandler()}>
         <span className={classes.Weekday}>{weekday}</span>
         <span className={classes.Day}>{date.getDate()}</span>
