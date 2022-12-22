@@ -13,14 +13,14 @@
 <h3 align="center">
   React React-router-dom Firebase ESLint Prettier pre-commit hook
 </h3>
-<h2 align="center"> Task </h2>
+<h2> Task </h2>
 <a
   href="https://drive.google.com/file/d/18I1PxOxZn2lwm__YeOtMNoWeiXygKwwN/view"
   target="_blank"
 >
   Clever to-do list task
 </a>
-<h2 align="center">How to run the app</h2>
+<h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
 <ol>
   <li>Запустить Вашу IDE.</li>
@@ -34,7 +34,7 @@
     локальном хосте
   </li>
 </ol>
-<h2 align="center">Database snapshot</h2>
+<h2>Database snapshot</h2>
 <a href="https://drive.google.com/file/d/1e5ont2ag2NUrmZDEi4dzq_r7A7fBc0w7/view?usp=share_link">
   Database structure
 </a>
