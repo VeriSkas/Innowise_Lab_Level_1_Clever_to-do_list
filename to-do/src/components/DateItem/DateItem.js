@@ -1,4 +1,4 @@
-import { weekDays } from '../../shared/dateInformation';
+import { weekDays } from '@constants/dateInformation';
 import classes from './DateItem.module.scss';
 
 export const DateItem = (props) => {
@@ -23,7 +23,7 @@ export const DateItem = (props) => {
   };
 
   return (
-    <div className={[classes.DateItem, classes[props.theme]].join(' ')}>
+    <div className={`${classes.DateItem} ${classes[props.theme]}`}>
       <div className={itemClass.join(' ')} onClick={() => activeDateHandler()}>
         <span className={classes.Weekday}>{weekday}</span>
         <span className={classes.Day}>{date.getDate()}</span>

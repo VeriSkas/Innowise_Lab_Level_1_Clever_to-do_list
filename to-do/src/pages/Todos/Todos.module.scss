@@ -1,0 +1,35 @@
+@import '@styles/color.scss';
+
+.Todos {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  background: linear-gradient(270deg, $authBlueLight1 0%, $authBlueLight3 100%);
+  overflow-y: hidden;
+
+  & > div {
+    padding: 10px 0 10px 10px;
+    border-radius: 5px;
+  }
+
+  .TodosMain {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
+
+.darkTheme {
+  background: $blueDarkTheme;
+
+  h3 {
+    color: $lightColor;
+  }
+}
+
+@media (max-height: 830px) {
+  .Todos {
+    max-height: 330px;
+  }
+}

@@ -1,13 +1,17 @@
+import { useTranslation } from 'react-i18next';
+
+import { NotificationTitle } from '@constants/text';
+
 import classes from './Notification.module.scss';
 
 export const Notification = (props) => {
-  const type = props.type || 'Success';
-  const cls = [classes.Notification, classes[type]];
+  const { t } = useTranslation();
+  const type = props.type || NotificationTitle.success;
 
   return (
-    <div className={cls.join(' ')}>
-      <h3>{type}</h3>
-      <p>{props.text}</p>
+    <div className={`${classes.Notification} ${classes[type]}`}>
+      <h3>{t(type)}</h3>
+      <p>{t(props.text)}</p>
     </div>
   );
 };

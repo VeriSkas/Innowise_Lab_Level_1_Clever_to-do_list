@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./src/img/icon.png" alt="icon img" height="32" />
+  <img src="@assets/icon.png" alt="icon img" height="32" />
   <a
     href="https://github.com/VeriSkas/Innowise_Lab_Level_1_Clever_to-do_list"
     target="_blank"
@@ -22,17 +22,17 @@
   Clever to-do list task
 </a>
 <hr/>
-<img src="./src/img/readme/to-do1.png" alt="auth incorrect password img" height="450" />
+<img src="@assets/readme/to-do1.png" alt="auth incorrect password img" height="450" />
 <hr/>
-<img src="./src/img/readme/to-do2.png" alt="auth with notification img" height="450" />
+<img src="@assets/readme/to-do2.png" alt="auth with notification img" height="450" />
 <hr/>
-<img src="./src/img/readme/to-do4.png" alt="mainPage img" height="450" />
+<img src="@assets/readme/to-do4.png" alt="mainPage img" height="450" />
 <hr/>
-<img src="./src/img/readme/to-do4.1.png" alt="mainPage dark img" height="450" />
+<img src="@assets/readme/to-do4.1.png" alt="mainPage dark img" height="450" />
 <hr/>
-<img src="./src/img/readme/to-do3.png" alt="create task img" height="450" />
+<img src="@assets/readme/to-do3.png" alt="create task img" height="450" />
 <hr/>
-<img src="./src/img/readme/to-do5.png" alt="change task img" height="450" />
+<img src="@assets/readme/to-do5.png" alt="change task img" height="450" />
 <hr/>
 <h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
@@ -52,7 +52,7 @@
 <a href="https://drive.google.com/file/d/1e5ont2ag2NUrmZDEi4dzq_r7A7fBc0w7/view?usp=share_link">
   Database structure
 </a>
-<img src="./src/img/todoDatabase.png" alt="database img" height="450" />
+<img src="@assets/todoDatabase.png" alt="database img" height="450" />
 <h2>Folders structure</h2>
 <p>Приложение состоит следующих файлов и папок:</p>
 <ol>

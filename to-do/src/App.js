@@ -1,18 +1,20 @@
 import { Component } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { Auth } from './containers/Auth/Auth';
-import { SignUp } from './containers/SignUp/SignUp';
-import { Content } from './containers/Content/Content';
-import { Layout } from './HOC/Layout/Layout';
-import { CreateTodo } from './containers/CreateTodo/CreateTodo';
-import { MainPage } from './containers/MainPage/MainPage';
-import { TodoPage } from './containers/TodoPage/TodoPage';
-import { localStorageHandler } from './shared/localStorage';
-import { auth } from './api/apiConfig';
-import { changeTheme, themes } from './shared/appTheme';
+import { Auth } from '@pages/Auth/Auth';
+import { SignUp } from '@pages/SignUp/SignUp';
+import { Content } from '@pages/Content/Content';
+import { Layout } from '@components/Layout/Layout';
+import { CreateTodo } from '@pages/CreateTodo/CreateTodo';
+import { MainPage } from '@pages/MainPage/MainPage';
+import { TodoPage } from '@pages/TodoPage/TodoPage';
+import { localStorageHandler } from '@utils/localStorage';
+import { auth } from '@queries/apiConfig';
+import { changeTheme, themes } from '@constants/appTheme';
+import { PATH } from '@constants/paths';
+import { NotificationType } from '@constants/text';
 
 export class App extends Component {
   constructor(props) {
@@ -54,7 +56,7 @@ export class App extends Component {
 
   createNotification(error) {
     const notification = {
-      type: 'Error',
+      type: NotificationType.error,
       text: error.code,
     };
 
@@ -79,7 +81,7 @@ export class App extends Component {
 
   render() {
     const protectedRoutes = (
-      <Route path="/" element={<Content theme={this.state.theme} />}>
+      <Route path={PATH.home} element={<Content theme={this.state.theme} />}>
         <Route
           index
           element={
@@ -90,11 +92,11 @@ export class App extends Component {
           }
         />
         <Route
-          path="to-do-create/:date"
+          path={PATH.createTodo}
           element={<CreateTodo theme={this.state.theme} />}
         />
         <Route
-          path="to-do/:id"
+          path={PATH.todo}
           element={
             <TodoPage todos={this.state.todos} theme={this.state.theme} />
           }
@@ -104,7 +106,7 @@ export class App extends Component {
     const unProtectedRoutes = (
       <>
         <Route
-          path="/auth"
+          path={PATH.auth}
           element={
             <Auth
               responseHandler={(response) => this.responseHandler(response)}
@@ -113,7 +115,7 @@ export class App extends Component {
           }
         />
         <Route
-          path="/sign-up"
+          path={PATH.signUp}
           element={
             <SignUp
               responseHandler={(response) => this.responseHandler(response)}
@@ -135,9 +137,9 @@ export class App extends Component {
             path="*"
             element={
               this.state.isLoggedIn ? (
-                <Navigate to="/" replace />
+                <Navigate to={PATH.home} replace />
               ) : (
-                <Navigate to="/auth" replace />
+                <Navigate to={PATH.auth} replace />
               )
             }
           />
