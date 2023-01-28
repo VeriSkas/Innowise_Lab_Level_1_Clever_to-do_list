@@ -12,7 +12,7 @@
   />
 </h1>
 <h3 align="center">
-  React React-router-dom Firebase ESLint Prettier pre-commit hook
+  React React-router-dom Firebase react-testing-library i18next react-app-rewired ESLint Prettier pre-commit hook
 </h3>
 <h2> Task </h2>
 <a
@@ -69,13 +69,14 @@
     содержатся:
   </li>
   <ul>
-    <li>папка api</li>
+    <li>папка assets</li>
     <li>папка components</li>
-    <li>папка containers</li>
-    <li>папка HOC</li>
-    <li>папка img</li>
-    <li>папка shared</li>
-    <li> Основные файлы js и scss</li>
+    <li>папка constants</li>
+    <li>папка pages</li>
+    <li>папка queries</li>
+    <li>папка utils</li>
+    <li>папка validation</li>
+    <li>Основные файлы js и scss</li>
   </ul>
   <li>
     <b>другие файлы настройки</b>
