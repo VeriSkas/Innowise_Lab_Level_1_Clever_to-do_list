@@ -9,8 +9,8 @@ import {
 import { Button } from '@components/UI/Button/Button';
 import { filterTodosByDate } from '@utils/filterTodos';
 import { localStorageHandler } from '@utils/localStorage';
-import { Calendar } from '../Calendar/Calendar';
-import { Todos } from '../Todos/Todos';
+import { Calendar } from '@components/Calendar/Calendar';
+import { Todos } from '@components/Todos/Todos';
 import classes from './MainPage.module.scss';
 import { PATH } from '@constants/paths';
 import { ButtonText } from '@constants/text';

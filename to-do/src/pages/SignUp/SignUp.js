@@ -14,7 +14,7 @@ import {
   InputType,
   LabelText,
   TextTitle,
-} from '../../constants/text';
+} from '@constants/text';
 
 export class SignUp extends Component {
   constructor(props) {
