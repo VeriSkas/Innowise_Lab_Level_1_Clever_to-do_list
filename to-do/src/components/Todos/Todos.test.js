@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from '@jest/globals';
 
-import { Todos } from './Todos';
+import Todos from './Todos';
 
 const todos = [
   { id: 1, text: 'todo text 1', completed: true },

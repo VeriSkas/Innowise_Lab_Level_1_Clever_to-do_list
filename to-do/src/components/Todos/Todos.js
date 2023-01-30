@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 
 import { Todo } from '@components/Todo/Todo';
 import classes from './Todos.module.scss';
@@ -30,13 +31,17 @@ export class Todos extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div className={`${classes.Todos} ${classes[this.props.theme]}`}>
         <div>
-          <h3>{TextTitle.todos}</h3>
+          <h3>{t(TextTitle.todos)}</h3>
           <div className={classes.TodosMain}>{this.renderTodo()}</div>
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(Todos);

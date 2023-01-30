@@ -4,6 +4,7 @@ export const TextTitle = {
   changeTask: 'Change task',
   createTask: 'Create new task',
   todos: 'Todos',
+  calendar: 'Calendar',
 };
 
 export const ButtonText = {
@@ -14,6 +15,7 @@ export const ButtonText = {
   return: 'Return',
   addTask: 'Add New Task',
   saveChanges: 'Save changes',
+  logOut: 'Log out',
 };
 
 export const LabelText = {

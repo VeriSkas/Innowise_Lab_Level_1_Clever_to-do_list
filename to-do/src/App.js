@@ -3,13 +3,13 @@ import { Component } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { Auth } from '@pages/Auth/Auth';
-import { SignUp } from '@pages/SignUp/SignUp';
+import Auth from '@pages/Auth/Auth';
+import SignUp from '@pages/SignUp/SignUp';
 import { Content } from '@pages/Content/Content';
 import { Layout } from '@components/Layout/Layout';
-import { CreateTodo } from '@pages/CreateTodo/CreateTodo';
-import { MainPage } from '@pages/MainPage/MainPage';
-import { TodoPage } from '@pages/TodoPage/TodoPage';
+import CreateTodo from '@pages/CreateTodo/CreateTodo';
+import MainPage from '@pages/MainPage/MainPage';
+import TodoPage from '@pages/TodoPage/TodoPage';
 import { localStorageHandler } from '@utils/localStorage';
 import { auth } from '@queries/apiConfig';
 import { changeTheme, themes } from '@constants/appTheme';

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import { makeDateToInputFormat, validateControl } from '@validation/validation';
 import { Input } from '@components/UI/Input/Input';
@@ -17,7 +18,7 @@ import {
   TextTitle,
 } from '@constants/text';
 
-export class CreateTodo extends Component {
+class CreateTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -141,9 +142,11 @@ export class CreateTodo extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div className={classes.CreateTodo}>
-        <h3>{TextTitle.createTask}</h3>
+        <h3>{t(TextTitle.createTask)}</h3>
         <form onSubmit={this.submitHandler} className={classes.CreateTodoForm}>
           {this.renderInputs()}
           <Button
@@ -151,13 +154,15 @@ export class CreateTodo extends Component {
             onClick={this.createTodoHandler}
             disabled={!this.state.isFormValid}
           >
-            {ButtonText.createTask}
+            {t(ButtonText.createTask)}
           </Button>
           <Link to={PATH.home}>
-            <Button>{ButtonText.return}</Button>
+            <Button>{t(ButtonText.return)}</Button>
           </Link>
         </form>
       </div>
     );
   }
 }
+
+export default withTranslation()(CreateTodo);

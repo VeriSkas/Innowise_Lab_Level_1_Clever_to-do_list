@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import { signUpHandler } from '@queries/apiHandlers/SignUpHandler';
 import { Button } from '@components/UI/Button/Button';
@@ -16,7 +17,7 @@ import {
   TextTitle,
 } from '@constants/text';
 
-export class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,10 +135,12 @@ export class SignUp extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div className={`${classes.SignUp} ${classes[this.props.theme]}`}>
         <div>
-          <h1>{TextTitle.signUp}</h1>
+          <h1>{t(TextTitle.signUp)}</h1>
 
           <form
             onSubmit={this.submitHandler}
@@ -150,10 +153,10 @@ export class SignUp extends Component {
                 onClick={this.registrHandler}
                 disabled={!this.state.isFormValid}
               >
-                {ButtonText.signUpSubmit}
+                {t(ButtonText.signUpSubmit)}
               </Button>
               <Link to={PATH.auth}>
-                <Button>{ButtonText.return}</Button>
+                <Button>{t(ButtonText.return)}</Button>
               </Link>
             </div>
           </form>
@@ -162,3 +165,5 @@ export class SignUp extends Component {
     );
   }
 }
+
+export default withTranslation()(SignUp);

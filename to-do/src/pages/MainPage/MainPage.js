@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import {
   deleteTodo,
@@ -10,12 +11,12 @@ import { Button } from '@components/UI/Button/Button';
 import { filterTodosByDate } from '@utils/filterTodos';
 import { localStorageHandler } from '@utils/localStorage';
 import { Calendar } from '@components/Calendar/Calendar';
-import { Todos } from '@components/Todos/Todos';
+import Todos from '@components/Todos/Todos';
 import classes from './MainPage.module.scss';
 import { PATH } from '@constants/paths';
 import { ButtonText } from '@constants/text';
 
-export class MainPage extends Component {
+class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,6 +67,7 @@ export class MainPage extends Component {
   };
 
   render() {
+    const { t } = this.props;
     const activeDateMs = +new Date(this.state.activeDate);
 
     return (
@@ -82,9 +84,11 @@ export class MainPage extends Component {
           theme={this.props.theme}
         />
         <Link to={`/${PATH.createTodos}/${activeDateMs}`}>
-          <Button> &#10010; {ButtonText.addTask}</Button>
+          <Button> &#10010; {t(ButtonText.addTask)}</Button>
         </Link>
       </div>
     );
   }
 }
+
+export default withTranslation()(MainPage);

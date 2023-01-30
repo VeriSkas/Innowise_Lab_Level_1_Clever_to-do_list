@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import { getTodo, updateTodo } from '@queries/apiHandlers/DatabaseHandler';
 import { Button } from '@components/UI/Button/Button';
@@ -17,7 +18,7 @@ import {
   TextTitle,
 } from '@constants/text';
 
-export class TodoPage extends Component {
+class TodoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -113,10 +114,11 @@ export class TodoPage extends Component {
 
   render() {
     const control = this.state.formControls['text'];
+    const { t } = this.props;
 
     return (
       <div className={classes.TodoPage}>
-        <h3>{TextTitle.changeTask}</h3>
+        <h3>{t(TextTitle.changeTask)}</h3>
         <form onSubmit={this.submitHandler} className={classes.TodoPageForm}>
           <Input
             theme={this.props.theme}
@@ -134,13 +136,15 @@ export class TodoPage extends Component {
             onClick={this.changeTodoHandler}
             disabled={!this.state.isFormValid}
           >
-            {ButtonText.saveChanges}
+            {t(ButtonText.saveChanges)}
           </Button>
           <Link to={PATH.home}>
-            <Button>{ButtonText.return}</Button>
+            <Button>{t(ButtonText.return)}</Button>
           </Link>
         </form>
       </div>
     );
   }
 }
+
+export default withTranslation()(TodoPage);

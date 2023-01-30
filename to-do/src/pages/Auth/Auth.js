@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import { authHandler } from '@queries/apiHandlers/AuthHandler';
 import { Button } from '@components/UI/Button/Button';
@@ -16,7 +17,7 @@ import {
   ButtonType,
 } from '@constants/text';
 
-export class Auth extends Component {
+class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -107,10 +108,12 @@ export class Auth extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div className={`${classes.Auth} ${classes[this.props.theme]}`}>
         <div>
-          <h1>{TextTitle.auth}</h1>
+          <h1>{t(TextTitle.auth)}</h1>
 
           <form
             onSubmit={this.submitHandler}
@@ -123,10 +126,10 @@ export class Auth extends Component {
                 onClick={this.loginHandler}
                 disabled={!this.state.isFormValid}
               >
-                {ButtonText.loginSubmit}
+                {t(ButtonText.loginSubmit)}
               </Button>
               <Link to={PATH.signUp}>
-                <Button>{ButtonText.loginToSignUp}</Button>
+                <Button>{t(ButtonText.loginToSignUp)}</Button>
               </Link>
             </div>
           </form>
@@ -135,3 +138,5 @@ export class Auth extends Component {
     );
   }
 }
+
+export default withTranslation()(Auth);

@@ -2,7 +2,7 @@ import { expect, describe, it } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { SignUp } from './SignUp';
+import SignUp from './SignUp';
 
 describe('SignUp component', () => {
   it('SignUp renders', () => {
