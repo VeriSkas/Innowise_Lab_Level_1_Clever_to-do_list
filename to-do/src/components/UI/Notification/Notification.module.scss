@@ -1,0 +1,27 @@
+@import '@styles/color.scss';
+
+.Notification {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  color: $lightColor;
+  text-shadow: 1px 1px 1px $black;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  &.Error {
+    background: rgba($color: $redNotification1, $alpha: .5);
+    border: 3px solid $redNotification2;
+  }
+
+  &.Success {
+    background: rgba($color: $greenNotification1, $alpha: .5);
+    border: 3px solid $greenNotification2;
+  }
+
+  &.Warning {
+    background: rgba($color: $orange, $alpha: .8);
+    border: 3px solid $yellowNotification1;
+  }
+}

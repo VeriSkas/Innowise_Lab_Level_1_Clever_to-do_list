@@ -1,0 +1,74 @@
+{
+  "name": "to-do",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "firebase": "^9.15.0",
+    "i18next": "^22.4.9",
+    "node-sass": "^7.0.3",
+    "react": "^18.2.0",
+    "react-app-rewire-alias": "^1.1.7",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.1.4",
+    "react-router-dom": "^6.4.5",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint *.js",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@constants/(.*)": "<rootDir>/src/constants/$1",
+      "@utils/(.*)": "<rootDir>/src/utils/$1",
+      "@assets/(.*)": "<rootDir>/src/assets/$1",
+      "@components/(.*)": "<rootDir>/src/components/$1",
+      "@pages/(.*)": "<rootDir>/src/pages/$1",
+      "@queries/(.*)": "<rootDir>/src/queries/$1",
+      "@validation/(.*)": "<rootDir>/src/validation/$1",
+      "@styles/(.*)": "<rootDir>/src/constants/styles/$1"
+    }
+  },
+  "lint-staged": {
+    "*.{js, jsx}": [
+      "node_modules/.bin/eslint --max-warnings=0",
+      "prettier --write"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1"
+  }
+}

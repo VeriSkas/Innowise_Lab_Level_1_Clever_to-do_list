@@ -1,0 +1,40 @@
+@import '@styles/color.scss';
+
+.SignUp {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  flex-grow: 1;
+  width: 100%;
+  background: linear-gradient(270deg, $greenLightTheme1 0%, $greenLightTheme2 100%);
+
+  & > div {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+  }
+
+  h1 {
+    color: $lightColor;
+    text-align: center;
+  }
+
+  .SignUpForm {
+    background: $lightAuthForm;
+    box-shadow: 2px 2px 2px $shadowColor;
+    padding: 15px;
+    border-radius: 5px;
+
+    .SignUpFormBtns {
+      text-align: center;
+    }
+  }
+}
+
+.darkTheme {
+  background: linear-gradient(290deg, $black 0%, $orangeDarkTheme 100%);
+
+  .SignUpForm {
+    background: $orangeGreyDarkTheme;
+  }
+}

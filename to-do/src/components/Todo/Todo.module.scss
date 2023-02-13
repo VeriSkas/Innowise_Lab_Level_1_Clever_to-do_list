@@ -1,0 +1,59 @@
+@import '@styles/color.scss';
+
+.Todo {
+  width: calc(100% - 10px);
+  background: $lightColor;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px $shadowColor;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .Option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(12px + 5 * (100vw / 762));
+    height: calc(12px + 5 * (100vw / 762));
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid $orange;
+    margin: 0 calc(5px + 5 * (100vw / 762));
+    font-size: calc(10px + 5 * (100vw / 762));
+    color: $lightColor;
+    cursor: pointer;
+
+    &.Done {
+      background: $orange;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $black;
+    width: 100%;
+
+    p {
+      text-align: start;
+      margin: calc(5px + 5 * (100vw / 762));
+      font-size: calc(12px + 3 * (100vw / 762));
+    }
+  }
+}
+
+.darkTheme {
+  background: $darkTheme1;
+
+  .Option {
+    color: $darkTheme1;
+  }
+
+  a {
+    color: $lightColor;
+  }
+}
